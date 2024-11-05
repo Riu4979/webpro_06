@@ -14,10 +14,12 @@ console.log( 'Hello' );
 
 ```mermaid
 flowchart TD;
-start[""];
-end1[""]
-win[""]
-lose[""]
+
+start["開始"]
+end1["終了"]
+if{"条件に合うか"}
+win["勝ち"]
+lose["負け"]
 
 start --> if
 if -->|yes|win
