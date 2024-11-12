@@ -82,3 +82,67 @@ app.get("/janken", (req, res) => {
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
+
+
+app.get("/hoi", (req, res) => {
+  let direction = req.query.direction;
+  let win = Number( req.query.win );
+  let total = Number( req.query.total );
+  console.log( {direction, win, total});
+  const num = Math.floor( Math.random() * 4 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = '右';
+  else if( num==2 ) cpu = '左';
+  else if( num==3 ) cpu = '上';
+  else cpu = '下';
+  // ここに勝敗の判定を入れる
+  let c;
+  if(cpu === "右"){
+    if(hand === "右") c = 0;
+    else if(hand === "左") c = 1;
+    else if(hand === "上") c = 1;
+    else if(hand === "下") c = 1;
+    else c = 3
+  }else if(cpu === "左"){
+    if(hand === "左") c = 0;
+    else if(hand === "右") c = 1;
+    else if(hand === "上") c = 1;
+    else if(hand === "下") c = 1;
+    else c = 3
+  }else if(cpu === "上"){
+    if(hand === "上") c = 0;
+    else if(hand === "右") c = 1;
+    else if(hand === "左") c = 1;
+    else if(hand === "下") c = 1;
+    else c = 3
+  }else if(cpu === "下"){
+    if(hand === "下") c = 0;
+    else if(hand === "右") c = 1;
+    else if(hand === "左") c = 1;
+    else if(hand === "上") c = 1;
+    else c = 3
+  };
+
+  // 今はダミーで人間の勝ちにしておく
+  let judgement;
+  if(c === 1){
+    judgement = "勝ち";
+    win += 1;
+    total += 1;
+  }else if(c ===0){
+    judgement = "負け";
+    total += 1;
+  }else{
+    judgement = "エラー"
+  }
+  const display = {
+    your: direction,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'hoi', display );
+});
+
+app.listen(8080, () => console.log("Example app listening on port 8080!"));
