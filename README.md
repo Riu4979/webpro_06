@@ -36,7 +36,7 @@ lose --> end1
 ##　課題内容
 
 ## 起動方法
-1. ターミナルで```webpuro_06```まで移動
+1. ターミナルで```webpro_06```まで移動
 2. ターミナルで```node app5.js```と入力，実行する
 3. ```telnet localhost 8080```とにゅうりょくする
 4. ```GET /(表示するファイル名) HTTP/1.1``
@@ -64,7 +64,7 @@ hello2では，hello1のときに定義していた変数message1，message2を�
 3. ランダムで運勢が表示される
 
 ### じゃんけんについて
-1. ```node app5.js```を起動する
+1. ターミナルで```node app5.js```を起動する
 2. ブラウザで```localhost:8080/public/janken.html```にアクセスする
 3. グー，チョキ，パーそれぞれの入力に対応してランダムにcpuの手が判定される
 4. ユーザーの手とcpuの手から勝敗が判定される
@@ -79,50 +79,56 @@ views/janken.ejs | じゃんけんの表示設定
 ```mermaid
 flowchart TD;
 
-start["開始"]
+start["開始"];
 end1["終了"]
-if1{"cpuがグーを出したか"}
-if2{"cpuがチョキを出したか"}
-if3{"cpuがパーを出したか"}
-if4{"ユーザーがグーを出したか"}
-if5{"ユーザーがチョキを出したか"}
-if6{"ユーザーがパーを出したか"}
+if{"cpuがパーを出したか"}
+if2{"プレイヤーがグーを出したか"}
+if3{"プレイヤーがチョキを出したか"}
+if4{"プレイヤーがパーを出したか"}
+if5{"cpuがグーを出したか"}
+judgement["cpuがチョキを出す"]
+if6{"プレイヤーがチョキを出したか"}
+if7{"プレイヤーがパーを出したか"}
+if8{"プレイヤーがグーを出したか"}
+if9{"プレイヤーがパーを出したか"}
+if10{"プレイヤーがグーを出したか"}
+if11{"プレイヤーがチョキを出したか"}
 win["勝ち"]
 lose["負け"]
 draw["引き分け"]
 error["エラー"]
 
-start --> if1
-if1 -->|yes|if4
-if1 -->|no|if2
-if4 -->|yes|draw
-if4 -->|no|if5
-if5 -->|yes|lose
-if5 -->|no|if6
-if6 -->|yes|win
-if6 -->|no|error
-if2 -->|yes|if4
-if2 -->|no|if3
-if4 -->|yes|win
-if4 -->|no|if5
-if5 -->|yes|draw
-if5 -->|no|if6
-if6 -->|yes|lose
-if6 -->|no|error
-if3 -->|yes|if4
-if4 -->|yes|lose
-if4 -->|no|if5
-if5 -->|yes|win
-if5 -->|no|if6
-if6 -->|yes|draw
-if6 -->|no|error
+start --> if
+if --> |yes| if2
+if --> |no| if5
+if2 --> |yes| lose
+if2 --> |no| if3
+if3 --> |yes| win
+if3 --> |no| if4
+if4 --> |yes| draw
+if4 --> |no| error
+if5 --> |yes| if6
+if5 --> |no| judgement
+if6 --> |yes| lose
+if6 --> |no| if7
+if7 --> |yes| win
+if7 --> |no| if8
+if8 --> |yes| draw
+if8 --> |no| error
+judgement --> if9
+if9 --> |yes| lose
+if9 --> |no| if10
+if10 --> |yes| win
+if10 --> |no| if11
+if11 --> |yes| draw
+if11 --> |no| error
 win --> end1
 lose --> end1
 draw --> end1
 error --> end1
 ```
 ### あっち向いてホイについて
-1. ```node app5.js```を起動する
+1. ターミナルで```node app5.js```を起動する
 2. ブラウザで```localhost:8080/public/hoi.html```にアクセスする
 3. 上，下，右，左から一つを選択する
 4. cpuがランダムで方向を選択して，ユーザーが選んだ方向と同じか判定する
@@ -142,11 +148,23 @@ end1["終了"]
 if1{"ユーザーが上を出したか"}
 if2{"ユーザーが下を出したか"}
 if3{"ユーザーが右を出したか"}
-if4{"ユーザーが左を出したか"}
+judgement["ユーザーが左を出したか"]
 if5{"cpuが上を出したか"}
 if6{"cpuが下を出したか"}
 if7{"cpuが右を出したか"}
 if8{"cpuが左を出したか"}
+if9{"cpuが上を出したか"}
+if10{"cpuが下を出したか"}
+if11{"cpuが右を出したか"}
+if12{"cpuが左を出したか"}
+if13{"cpuが上を出したか"}
+if14{"cpuが下を出したか"}
+if15{"cpuが右を出したか"}
+if16{"cpuが左を出したか"}
+if17{"cpuが上を出したか"}
+if18{"cpuが下を出したか"}
+if19{"cpuが右を出したか"}
+if20{"cpuが左を出したか"}
 win["勝ち"]
 lose["負け"]
 error["エラー"]
@@ -162,40 +180,84 @@ if7 -->|yes|lose
 if7 -->|no|if8
 if8 -->|yes|lose
 if8 -->|no|error
-if2 -->|yes|if5
+if2 -->|yes|if9
 if2 -->|no|if3
-if5 -->|yes|lose
-if5 -->|no|if6
-if6 -->|yes|win
-if6 -->|no|if7
-if7 -->|yes|lose
-if7 -->|no|if8
-if8 -->|yes|lose
-if8 -->|no|error
-if3 -->|yes|if5
-if3 -->|no|if4
-if5 -->|yes|lose
-if5 -->|no|if6
-if6 -->|yes|lose
-if6 -->|no|if7
-if7 -->|yes|win
-if7 -->|no|if8
-if8 -->|yes|lose
-if8 -->|no|error
-if4 -->|yes|if5
-if5 -->|yes|lose
-if5 -->|no|if6
-if6 -->|yes|lose
-if6 -->|no|if7
-if7 -->|yes|lose
-if7 -->|no|if8
-if8 -->|yes|win
-if8 -->|no|error
+if9 -->|yes|lose
+if9 -->|no|if10
+if10 -->|yes|win
+if10 -->|no|if11
+if11 -->|yes|lose
+if11 -->|no|if12
+if12 -->|yes|lose
+if12 -->|no|error
+if3 -->|yes|if13
+if3 -->|no|judgement
+if13 -->|yes|lose
+if13 -->|no|if14
+if14 -->|yes|lose
+if14 -->|no|if15
+if15 -->|yes|win
+if15 -->|no|if16
+if16 -->|yes|lose
+if16 -->|no|error
+if4 -->|yes|if17
+if17 -->|yes|lose
+if17 -->|no|if18
+if18 -->|yes|lose
+if18 -->|no|if19
+if19 -->|yes|lose
+if19 -->|no|if20
+if20 -->|yes|win
+if20 -->|no|error
 win --> end1
 lose --> end1
 error --> end1
 ```
 ### 数字が被らないようにするゲームについて
+1. ターミナルで```node.app5.js```を起動する
+2. ブラウザで```localhost:8080/public/suuji.html```にアクセスする
+4. 1~6の数字を入力，実行する
+5. cpuの数字がランダムで判定され，ユーザーと同じ場合負け，違う場合勝ちとする．
+6. ユーザーの数字，cpuの数字，判定，勝利数，試合数を表示する
 
+```mermaid
+flowchart TD;
+
+start["開始"]
+end1["終了"]
+if1{"ユーザーが1を出したか"}
+if2{"ユーザーが2を出したか"}
+if3{"ユーザーが3を出したか"}
+if4{"ユーザーが4を出したか"}
+if5{"ユーザーが5を出したか"}
+fi6{"ユーザーが6を出したか"}
+if7{"cpuの数字と一致したか"}
+win["勝ち"]
+lose["負け"]
+error["エラー"]
+
+start --> if1
+if1 -->|yes|if7
+if1 -->|no|if2
+if2 -->|yes|if7
+if2 -->|no|if3
+if3 -->|yes|if7
+if3 -->|no|if4
+if4 -->|yes|if7
+if4 -->|no|if5
+if5 -->|yes|if7
+if5 -->|no|if6
+if6 -->|yes|if7
+if6 -->|no|error
+if7 -->|yes|lose
+if7 -->|no|win
+win -->end1
+lose -->end1
+error -->end1
+```
 
 ## Gitで管理する方法
+1. 適切なディレクトリに移動する
+2. ターミナルで```git add .```と入力する
+3. コメントを```git commit -am '入力するコメント'```でコメントの部分に入力する
+4. ```git push```で更新する
