@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>あっち向いてホイ</title>
+</head>
+<body>
+    <h1>あっち向いてホイ</h1>
+
+    <form action="/hoi" method="get">
+        <label for="direction">何を出す？</label>
+        <select name="direction" required>
+            <option value="右">右</option>
+            <option value="左">左</option>
+            <option value="上">上</option>
+            <option value="下">下</option>
+        </select>
+
+        <br><br>
+
+        <input type="hidden" name="win1" value="0">
+        <input type="hidden" name="total1" value="0">
+
+        <button type="submit">あっち向いてホイ</button>
+    </form>
+</body>
+</html>

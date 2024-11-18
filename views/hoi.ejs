@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>あっち向いてホイ</title>
+</head>
+<body>
+    <h1>あっち向いてホイ</h1>
+
+    <p>あなたの向きは <%= your %> です。</p>
+    <p>コンピュータは <%= cpu %> です。</p>
+    <p>判定：<%= judgement1 %></p>
+    <p>現在 <%= total1 %> 試合中 <%= win1 %> 勝しています。</p>
+
+    <hr>
+
+    <form action="/hoi" method="get">
+        <label for="direction">次は何を出す？</label>
+        <select name="direction" required>
+            <option value="右">右</option>
+            <option value="左">左</option>
+            <option value="上">上</option>
+            <option value="下">下</option>
+        </select>
+
+        <br><br>
+
+        <input type="hidden" name="win1" value="<%= win1 %>">
+        <input type="hidden" name="total1" value="<%= total1 %>">
+
+        <button type="submit">あっち向いてホイ</button>
+    </form>
+</body>
+</html>
