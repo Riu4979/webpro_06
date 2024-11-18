@@ -200,7 +200,7 @@ if15 -->|yes|win
 if15 -->|no|if16
 if16 -->|yes|lose
 if16 -->|no|error
-if4 -->|yes|if17
+judgement -->|yes|if17
 if17 -->|yes|lose
 if17 -->|no|if18
 if18 -->|yes|lose
