@@ -112,6 +112,40 @@ app.get("/hoi", (req, res) => {
 });
 
 
-app.listen(8080, () => {
-  console.log("Server is running on http://localhost:8080");
+app.get("/suuji", (req, res) => {
+  // ユーザーからの入力を取得
+  let number = req.query.number;
+  let win2 = Number(req.query.win2);  // 勝ち数
+  let total = Number(req.query.total); // 試合数
+  console.log({ number, win2, total });
+
+  // コンピュータがランダムに出す数字を生成
+  const num = Math.floor(Math.random() * 6 + 1);  // 1〜6のランダムな数字
+  let cpu = num.toString();  // 数字を文字列に変換
+
+  // 勝敗の判定
+  let judgement;
+  if (cpu === number) {
+    judgement = "負け";
+    total += 1;
+  } else {
+    judgement = "勝ち";
+    win2 += 1;
+    total += 1;
+  }
+
+  // 結果を表示するためのオブジェクトを作成
+  const display = {
+    your: number,   // ユーザーが出した数字
+    cpu: cpu,       // コンピュータが出した数字
+    judgement: judgement, // 勝敗
+    win2: win2,     // 勝ち数
+    total: total    // 試合数
+  };
+
+  // suuji.ejs をレンダリング
+  res.render('suuji', display);
 });
+
+
+app.listen(8080, () => console.log("Example app listening on port 8080!"));

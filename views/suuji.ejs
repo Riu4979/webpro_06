@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>数字 かぶるな</title>
+</head>
+<body>
+    <p>あなたの出した数字は<%= your %>です．</p>
+    <p>コンピュータが出した数字は<%= cpu %>です．</p>
+    <p>判定：<%= judgement %></p>
+    <p>現在<%= total %>試合中<%= win2 %>勝しています．</p>
+    <hr>
+    <form action="/suuji" method="get">
+        <input type="text" name="number" required>
+        <label for="number">次は何を出す？</label>
+        <input type="hidden" name="win2" value="<%= win2 %>">
+        <input type="hidden" name="total" value="<%= total %>">
+        <input type="submit" value="数字入力">
+    </form>   
+</body>
+</html>
