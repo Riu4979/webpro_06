@@ -1,0 +1,40 @@
+.cover {
+    border-bottom: 1px solid #c0c0c0;
+    margin: 3px;
+}
+
+.name {
+    font-weight: bold;
+    width: 8em;
+}
+
+.mes {
+    margin-left: 30px;
+}
+
+button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+button.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button.edit:hover {
+    background-color: #45a049;
+}
+
+button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #e41f14;
+}
