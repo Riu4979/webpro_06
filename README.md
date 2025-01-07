@@ -346,6 +346,6 @@ if1 --> if2
 if2 --> if3
 if3 -- if4
 if4 -->|yes|if5
-if5 --> end1
 if4 -->|no|error
+if5 --> end1
 ```
