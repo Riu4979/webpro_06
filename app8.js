@@ -128,15 +128,15 @@ app.post("/reply", (req, res) => {
   res.json({ success: true, post: parentPost });
 });
 
-// 投稿削除
-app.delete("/delete/:id", (req, res) => {
+// 投稿削除 (POSTメソッドに変更)
+app.post("/delete/:id", (req, res) => {
   const id = Number(req.params.id);
   bbs = bbs.filter(post => post.id !== id);
   res.json({ number: bbs.length });
 });
 
 // 投稿更新
-app.put("/update/:id", (req, res) => {
+app.post("/update/:id", (req, res) => {
   const id = Number(req.params.id);
   const { name, message } = req.body;
   const postIndex = bbs.findIndex(post => post.id === id);

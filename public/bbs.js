@@ -13,7 +13,7 @@ document.querySelector('#post').addEventListener('click', () => {
     if (editingPostId) {
         // 編集中の場合、既存の投稿を更新
         const params = {
-            method: 'PUT',
+            method: 'POST',
             body: 'name=' + name + '&message=' + message,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -109,28 +109,29 @@ function renderPost(post) {
         document.querySelector('#message').value = post.message;
     });
 
-    // 削除ボタン
-    let delete_button = document.createElement('button');
-    delete_button.innerText = '削除';
-    delete_button.addEventListener('click', () => {
-        const params = {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+// 削除ボタン
+let delete_button = document.createElement('button');
+delete_button.innerText = '削除';
+delete_button.addEventListener('click', () => {
+    const params = {
+        method: 'POST',  // POSTメソッドに変更
+        body: 'id=' + post.id,  // 投稿IDをボディに渡す
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    const url = "/delete/" + post.id;  // 同じURLを使う
+    fetch(url, params)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Error');
             }
-        };
-        const url = "/delete/" + post.id;
-        fetch(url, params)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Error');
-                }
-                return response.json();
-            })
-            .then((response) => {
-                cover.remove();  // 投稿削除後、DOMからも削除
-            });
-    });
+            return response.json();
+        })
+        .then((response) => {
+            cover.remove();  // 投稿削除後、DOMからも削除
+        });
+});
 
     // 返信ボタン
     let reply_button = document.createElement('button');

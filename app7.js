@@ -96,6 +96,18 @@ app.post("/read", (req, res) => {
   else res.json( {messages: bbs.slice( start )});
 });
 
+app.post("/read", (req, res) => {
+  const start = Number(req.body.start);
+  console.log("read -> " + start);
+
+  // 投稿リストを返す際に、IDと投稿時間を含めて返します
+  if (start === 0) {
+    res.json({ messages: bbs });
+  } else {
+    res.json({ messages: bbs.slice(start) });
+  }
+});
+
 app.post("/post", (req, res) => {
   const name = req.body.name;
   const message = req.body.message;
@@ -103,6 +115,22 @@ app.post("/post", (req, res) => {
   // 本来はここでDBMSに保存する
   bbs.push( { name: name, message: message } );
   res.json( {number: bbs.length } );
+});
+
+app.post("/post", (req, res) => {
+  const name = req.body.name;
+  const message = req.body.message;
+
+  // ユニークなIDと投稿日時を追加
+  const id = bbs.length + 1;  // 簡易な方法でIDを付与
+  const timestamp = new Date().toLocaleString();  // 現在時刻を取得
+
+  console.log([name, message]);
+
+  // 新しい投稿を追加
+  bbs.push({ id: id, name: name, message: message, timestamp: timestamp });
+
+  res.json({ number: bbs.length });
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
