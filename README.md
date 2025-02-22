@@ -346,9 +346,7 @@ if3 --> if4
 if4 --> end1
 ```
 
-```mermaid
-flowchart TD;
-
+sequenceDiagram
 webブラウザ->>webサーバ: webページ取得
 webサーバ-->webブラウザ: HTML,JS,CSS
 webブラウザ->>BBSクライアント: 起動
@@ -366,4 +364,3 @@ BBSクライアント-->BBSサーバ: delete(元投稿の削除)
 BBSサーバ-->BBSクライアント: 投稿
 BBSクライアント->>BBSサーバ: reply(返信)
 BBSサーバ-->BBSクライアント: 名前，投稿内容
-```
