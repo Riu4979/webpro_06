@@ -345,23 +345,29 @@ if2 --> if3
 if3 --> if4
 if4 --> end1
 ```
+
 ```mermaid
 sequenceDiagram
-webブラウザ->>webサーバ: webページ取得
-webサーバ-->webブラウザ: HTML,JS,CSS
-webブラウザ->>BBSクライアント: 起動
-BBSクライアント->>BBSサーバ: Post(書き込み)
-BBSサーバ-->BBSクライアント: 書き込み数
-BBSクライアント->>BBSサーバ: Post(更新)
-BBSサーバ-->BBSクライアント: 書き込み数
-BBSクライアント->>BBSサーバ: Read(読み込み)
-BBSサーバ-->BBSクライアント: 名前，投稿内容
-BBSクライアント->>BBSサーバ: delete(削除)
-BBSサーバ-->BBSクライアント: 書き込みの消去
-BBSクライアント->>BBSサーバ：update(編集)
-BBSサーバ-->BBSクライアント: 名前，投稿内容の表示
-BBSクライアント-->BBSサーバ: delete(元投稿の削除)
-BBSサーバ-->BBSクライアント: 投稿
-BBSクライアント->>BBSサーバ: reply(返信)
-BBSサーバ-->BBSクライアント: 名前，投稿内容
+    participant WebBrowser as "webブラウザ"
+    participant WebServer as "webサーバ"
+    participant BBSClient as "BBSクライアント"
+    participant BBSServer as "BBSサーバ"
+
+    WebBrowser->>WebServer: webページ取得
+    WebServer-->WebBrowser: HTML,JS,CSS
+    WebBrowser->>BBSClient: 起動
+    BBSClient->>BBSServer: Post(書き込み)
+    BBSServer-->BBSClient: 書き込み数
+    BBSClient->>BBSServer: Post(更新)
+    BBSServer-->BBSClient: 書き込み数
+    BBSClient->>BBSServer: Read(読み込み)
+    BBSServer-->BBSClient: 名前，投稿内容
+    BBSClient->>BBSServer: delete(削除)
+    BBSServer-->BBSClient: 書き込みの消去
+    BBSClient->>BBSServer: update(編集)
+    BBSServer-->BBSClient: 名前，投稿内容の表示
+    BBSClient-->BBSServer: delete(元投稿の削除)
+    BBSServer-->BBSClient: 投稿
+    BBSClient->>BBSServer: reply(返信)
+    BBSServer-->BBSClient: 名前，投稿内容
 ```
